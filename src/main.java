@@ -47,10 +47,28 @@ public class Main {
         for(int i = 0; i < candidatos.length; i++) {
             System.out.println("Candidato N" + (i+1) + "°: " + candidatos[i]);
         }
+        do{
+            System.out.println("Digite o número do candidato para votar:");
+            numcandidato = Entrada.nextInt();
 
-        System.out.println("Digite o número do candidato para votar:");
-        numcandidato = Entrada.nextInt();
-        votos[numcandidato - 1]++;
-        System.out.println("Você votou no Candidato " + candidatos[numcandidato - 1]);
+            if(numcandidato >= 1 && numcandidato <= 4){
+            votos[numcandidato - 1]++;
+            System.out.println("Você votou no Candidato " + candidatos[numcandidato - 1]);
+            }
+
+            else if(numcandidato == 5){
+                votos[4]++;
+                System.out.println("Você votou em branco!");
+            }
+
+            else if(numcandidato == 6){
+                votos[5]++;
+                System.out.println("Você votou nulo!");
+            }
+
+            else{
+                System.out.println("Número Inválido!");
+            }
+        }while(numcandidato < 1 || numcandidato > 6);
     }
 }
