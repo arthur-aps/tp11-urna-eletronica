@@ -7,6 +7,8 @@ public class Main {
         int opcao;
         int[] votos = new int[6];
         String[] candidatos = new String[4];
+        int eleitores = 0;
+        int limite_eleitores = 6;
 
         do {
         exibirCabecalho(); // <== METODO COMPARTILHADO (ponto de conflito)
@@ -15,7 +17,13 @@ public class Main {
         opcao = entrada.nextInt();
         switch (opcao) {
             case 1:
-                votacao(votos, candidatos, entrada);
+                if(eleitores < limite_eleitores){
+                    votacao(votos, candidatos, entrada);
+                    eleitores++;
+                }
+                else{
+                    System.out.println("A votação foi encerrada!");
+                }
             break;
             case 2: /* funcionalidade do Desenvolvedor B */ break;
             case 0: System.out.println("Encerrando..."); break;
