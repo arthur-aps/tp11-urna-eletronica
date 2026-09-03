@@ -42,5 +42,15 @@ public class Main {
         candidatos[1]= "Jairo Messias Bolsanario";
         candidatos[2]= "Renato Santana";
         candidatos[3]= "Adalberto Auto-Peças";
+        int numcandidato;
+
+        for(int i = 0; i < candidatos.length; i++) {
+            System.out.println("Candidato N" + (i+1) + "°: " + candidatos[i]);
+        }
+
+        System.out.println("Digite o número do candidato para votar:");
+        numcandidato = Entrada.nextInt();
+        votos[numcandidato - 1]++;
+        System.out.println("Você votou no Candidato " + candidatos[numcandidato - 1]);
     }
 }
