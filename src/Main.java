@@ -1,14 +1,17 @@
 import java.util.Scanner;
 
 public class Main {
-    private void MostrarResultadosVotacao(int[] votos, String[] candidatos) {
-        totalVotos = 0;
+
+    public static void MostrarResultadosVotacao(int[] votos, String[] candidatos) {
+        int totalVotos = 0;
 
         if (votos == null || candidatos == null || votos.length != candidatos.length + 2) {
             System.out.println("Dados inválidos para exibir resultados.");
             return;
         }
+
         System.out.println("=== Resultados da votação: ===");
+
         for (int i = 0; i < votos.length - 2; i++) {
             System.out.println(candidatos[i] + " - " + votos[i] + " votos");
             totalVotos += votos[i];
@@ -19,17 +22,18 @@ public class Main {
 
         System.out.println("==============================");
         System.out.println();
-        System.out.println("Total de votos: " + totalVotos);
-        System.out.println("Porcentagens de cada candidato:")
+        System.out.println("Total de votos válidos: " + totalVotos);
+        System.out.println("Porcentagens de cada candidato:");
 
-        for (int i = 0; i < votos.length - 2; i++) {
-            System.out.println(candidatos[i] + " - " + (votos[i] * 100 / votos.length) + "% dos votos");
+        if (totalVotos > 0) {
+            for (int i = 0; i < votos.length - 2; i++) {
+                System.out.println(candidatos[i] + " - "
+                        + (votos[i] * 100 / totalVotos)
+                        + "% dos votos");
+            }
+        } else {
+            System.out.println("Ainda não existem votos válidos.");
         }
-
-        System.out.println("Votos em branco: " + (votos[votos.length - 2] * 100 / votos.length) + "% dos votos");
-        System.out.println("Votos nulos: " + (votos[votos.length - 1] * 100 / votos.length) + "% dos votos");
-
-        return
     }
 
     public static void main(String[] args) {
@@ -42,26 +46,37 @@ public class Main {
         int limite_eleitores = 6;
 
         do {
-        exibirCabecalho(); // <== METODO COMPARTILHADO (ponto de conflito)
-        exibirMenu();
-        opcao = entrada.nextInt();
-        switch (opcao) {
-            case 1:
-                if(eleitores < limite_eleitores){
-                    votacao(votos, candidatos, entrada);
-                    eleitores++;
-                }
-                else{
-                    System.out.println("A votação foi encerrada!");
-                }
-            break;
-            case 2: MostrarResultadosVotacao(votos, candidatos); break;
-            case 0: System.out.println("Encerrando..."); break;
-            default: System.out.println("Opcao invalida!");
-        }
+            exibirCabecalho();
+            exibirMenu();
+
+            opcao = entrada.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    if (eleitores < limite_eleitores) {
+                        votacao(votos, candidatos, entrada);
+                        eleitores++;
+                    } else {
+                        System.out.println("A votação foi encerrada!");
+                    }
+                    break;
+
+                case 2:
+                    MostrarResultadosVotacao(votos, candidatos);
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
+
+                default:
+                    System.out.println("Opcao invalida!");
+            }
+
         } while (opcao != 0);
-            entrada.close();
-        }
+
+        entrada.close();
+    }
 
     public static void exibirCabecalho() {
         System.out.println("==========================");
@@ -76,40 +91,38 @@ public class Main {
         System.out.print("Escolha: ");
     }
 
-    public static void votacao(int[] votos, String[] candidatos, Scanner Entrada){
-        candidatos[0]= "Luis Vinicius Polvo Da Silva";
-        candidatos[1]= "Jairo Messias Bolsanario";
-        candidatos[2]= "Renato Santana";
-        candidatos[3]= "Adalberto Auto-Peças";
+    public static void votacao(int[] votos, String[] candidatos, Scanner Entrada) {
+        candidatos[0] = "Luis Vinicius Polvo Da Silva";
+        candidatos[1] = "Jairo Messias Bolsanario";
+        candidatos[2] = "Renato Santana";
+        candidatos[3] = "Adalberto Auto-Peças";
+
         int numcandidato;
 
-        for(int i = 0; i < candidatos.length; i++) {
-            System.out.println("Candidato N" + (i+1) + "°: " + candidatos[i]);
+        for (int i = 0; i < candidatos.length; i++) {
+            System.out.println("Candidato N" + (i + 1) + "°: " + candidatos[i]);
         }
+
         System.out.println("N5°: Votar em Branco");
         System.out.println("N6°: Votar Nulo");
-        do{
+
+        do {
             System.out.println("Digite o número do candidato para votar:");
             numcandidato = Entrada.nextInt();
 
-            if(numcandidato >= 1 && numcandidato <= 4){
-            votos[numcandidato - 1]++;
-            System.out.println("Você votou no Candidato " + candidatos[numcandidato - 1]);
-            }
-
-            else if(numcandidato == 5){
+            if (numcandidato >= 1 && numcandidato <= 4) {
+                votos[numcandidato - 1]++;
+                System.out.println("Você votou no Candidato " + candidatos[numcandidato - 1]);
+            } else if (numcandidato == 5) {
                 votos[4]++;
                 System.out.println("Você votou em branco!");
-            }
-
-            else if(numcandidato == 6){
+            } else if (numcandidato == 6) {
                 votos[5]++;
                 System.out.println("Você votou nulo!");
-            }
-
-            else{
+            } else {
                 System.out.println("Número Inválido!");
             }
-        }while(numcandidato < 1 || numcandidato > 6);
+
+        } while (numcandidato < 1 || numcandidato > 6);
     }
 }
