@@ -55,6 +55,8 @@ public class Main {
         for(int i = 0; i < candidatos.length; i++) {
             System.out.println("Candidato N" + (i+1) + "°: " + candidatos[i]);
         }
+        System.out.println("N5°: Votar em Branco");
+        System.out.println("N6°: Votar Nulo");
         do{
             System.out.println("Digite o número do candidato para votar:");
             numcandidato = Entrada.nextInt();
