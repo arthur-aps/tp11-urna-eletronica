@@ -21,6 +21,15 @@ public class Main {
         System.out.println();
         System.out.println("Total de votos: " + totalVotos);
         System.out.println("Porcentagens de cada candidato:")
+
+        for (int i = 0; i < votos.length - 2; i++) {
+            System.out.println(candidatos[i] + " - " + (votos[i] * 100 / votos.length) + "% dos votos");
+        }
+
+        System.out.println("Votos em branco: " + (votos[votos.length - 2] * 100 / votos.length) + "% dos votos");
+        System.out.println("Votos nulos: " + (votos[votos.length - 1] * 100 / votos.length) + "% dos votos");
+
+        return
     }
 
     public static void main(String[] args) {
