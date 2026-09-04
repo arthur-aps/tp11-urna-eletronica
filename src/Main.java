@@ -40,9 +40,10 @@ public class Main {
     }
         
     public static void exibirMenu() {
-        System.out.println("1 - ...");
-        System.out.println("0 - Sair");
-        System.out.print("Escolha: ");
+            System.out.println("1 - Votar");
+            System.out.println("2 - Ver Resultados");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
     }
 
     public static void votacao(int[] votos, String[] candidatos, Scanner Entrada){
